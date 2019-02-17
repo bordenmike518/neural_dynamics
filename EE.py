@@ -1,3 +1,10 @@
+'''
+Author  : Michael Borden
+Date    : Feb 6, 2019
+Update  : Feb 17, 2019
+
+Purpose : EE class to help simulate electical neural dynamics.
+'''
 import math
 
 class UnitMathOps:

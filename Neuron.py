@@ -1,3 +1,10 @@
+'''
+Author  : Michael Borden
+Date    : Feb 10, 2019
+Update  : Feb 17, 2019
+
+Purpose : Simulation of a single spiking neuron.
+'''
 from EE import Power, Voltage, Current, Resistance 
 from copy import deepcopy
 from collections import deque
