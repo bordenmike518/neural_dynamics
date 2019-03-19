@@ -8,11 +8,11 @@ Purpose : EE class to help simulate electical neural dynamics.
 import math
 
 class UnitMathOps:
-    def __init__(self, value, units, _type, T):
+    def __init__(self, value, units, utype, T):
         self.T = T
         self.value = 0.00
-        self.units = units.replace(_type, '')
-        self.type  = _type
+        self.units = units.replace(utype, '')
+        self.type  = utype
         self.convTable = {'μ': 10**-6,
                           'n': 10**-6,
                           'm': 10**-3, 
@@ -22,37 +22,37 @@ class UnitMathOps:
         self.setValue(value, units)
 
     def __add__(self, other):
-        self.assertType('add', self.type, other.type)
+        self.assertType('add', other.type)
         val = self.value + other.value
         return self.T(self.getValue(val, self.units), self.units)
 
     def __sub__(self, other):
-        self.assertType('sub', self.type, other.type)
+        self.assertType('sub', other.type)
         val = self.value - other.value
         return self.T(self.getValue(val, self.units), self.units)
 
     def __mul__(self, other):
-        self.assertType('mul', self.type, other.type)
+        self.assertType('mul', other.type)
         val = self.value * other.value
         return self.T(self.getValue(val, self.units), self.units)
 
     def __div__(self, other):
-        self.assertType('div', self.type, other.type)
+        self.assertType('div', other.type)
         val = self.value / other.value
         return self.T(self.getValue(val, self.units), self.units)
 
     def __floordiv__(self, other):
-        self.assertType('floordiv', self.type, other.type)
+        self.assertType('floordiv', other.type)
         val = self.value // other.value
         return self.T(self.getValue(val, self.units), self.units)
 
     def __mod__(self, other):
-        self.assertType('mod', self.type, other.type)
+        self.assertType('mod', other.type)
         val = self.value % other.value
         return self.T(self.getValue(val, self.units), self.units)
 
     def __pow__(self, other):
-        self.assertType('pow', self.type, other.type)
+        self.assertType('pow', other.type)
         val = self.value ** other.value
         return self.T(self.getValue(val, self.units), self.units)
 
@@ -61,36 +61,36 @@ class UnitMathOps:
         return self.T(self.getValue(val, self.units), self.units)
 
     def __lt__(self, other):
-        self.assertType('compare', self.type, other.type)
+        self.assertType('compare', other.type)
         return self.value < other.value
 
     def __le__(self, other):
-        self.assertType('compare', self.type, other.type)
+        self.assertType('compare', other.type)
         return self.value <= other.value
 
     def __eq__(self, other):
-        self.assertType('compare', self.type, other.type)
+        self.assertType('compare', other.type)
         return self.value == other.value
 
     def __ne__(self, other):
-        self.assertType('compare', self.type, other.type)
+        self.assertType('compare', other.type)
         return self.value != other.value
 
     def __ge__(self, other):
-        self.assertType('compare', self.type, other.type)
+        self.assertType('compare', other.type)
         return self.value >= other.value
 
     def __gt__(self, other):
-        self.assertType('compare', self.type, other.type)
+        self.assertType('compare', other.type)
         return self.value > other.value
 
     def __str__(self):
         return '{} {}{}'.format(self.getValue(self.value, self.units), 
                                 self.units, self.type)
     
-    def assertType(self, func, t1, t2):
-        assert t1 == t2, "ERROR: Cannot {} type {} and {}"\
-                         .format(func, self.type, other.type)
+    def assertType(self, func, t):
+        assert self.type == t, 'ERROR: Cannot {} type {} and {}' \
+                         .format(func, self.type, t)
 
     def setValue(self, value, units=''):
         self.value = value * self.convTable[units]
@@ -203,5 +203,3 @@ class Resistance(UnitMathOps):
             return Current(math.sqrt(other.value / self.value))
         else:
             return Current(other.value / self.value)
-
-
