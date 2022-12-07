@@ -2,7 +2,6 @@
 Author  : Michael Borden
 Date    : Feb 16, 2019
 Update  : Feb 17, 2019
-https://www.amazon.com/gp/cart/view.html/ref=lh_co?ie=UTF8&proceedToCheckout.x=129&cartInitiateId=1552429890599
 Purpose : Simulation of the human brain using SNN.
 '''
 from Neuron import Neuron
